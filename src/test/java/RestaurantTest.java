@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,6 +42,24 @@ class RestaurantTest {
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<OPEN/CLOSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    @Test
+    public void adding_item_to_menu_should_display_total_price() {
+        List<Item> menu = restaurant.getMenu();
+        int totalPrice = 388;
+        int actualTotalPrice = restaurant.showTotalPrice(menu);
+        assertEquals(totalPrice,actualTotalPrice);
+    }
+
+    @Test
+    public void adding_no_item_to_menu_should_display_total_price_0() {
+        List<Item> menu = restaurant.getMenu();
+        int totalPrice = 0;
+        int actualTotalPrice = restaurant.showTotalPrice(menu);
+        assertEquals(totalPrice,actualTotalPrice);
+    }
+
+
+
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>MENU<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     @Test
@@ -49,6 +68,7 @@ class RestaurantTest {
         restaurant.addToMenu("Sizzling brownie",319);
         assertEquals(initialMenuSize+1,restaurant.getMenu().size());
     }
+
     @Test
     public void removing_item_from_menu_should_decrease_menu_size_by_1() throws itemNotFoundException {
 
